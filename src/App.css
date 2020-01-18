@@ -1,38 +1,235 @@
+
 .App {
-  text-align: center;
+  margin: 2px;
+  background-color: #DCDCDC;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#body {
+    min-height: 75vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+#header {
+  height: 12vh;
+  width: 100%;
+  background-color: black;
+  color: blanchedalmond;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#header span {
+    color: white;
+    font-weight: 600;
+}
+
+.header-nav span{
+  padding: 0 5px;
+  margin-right: 0;
+}
+
+#menu-bar {
+  width: 35px;
+  height: 5px;
+  background-color: black;
+  margin: 6px 0;
+}
+
+#dropdown{
+  height: 300px;
+  width: 200px;
+  background-color: blue;
+  position: absolute;
+  top: auto;
+  left: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  align-items: flex-start;
+  animation: open 900ms;
+  overflow: hidden;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
+@keyframes open {
   from {
-    transform: rotate(0deg);
+    height: 0px;
   }
   to {
-    transform: rotate(360deg);
+    height: 300px;
   }
+}
+
+.search {
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  margin: 5px;
+}
+
+.search button {
+	box-shadow: 0px 0px 0px 2px #9fb4f2;
+	background:linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
+	background-color:#7892c2;
+	border-radius:10px;
+	border:1px solid #4e6096;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:9px;
+	padding:2px 7px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #283966;
+}
+.search button:hover {
+	background:linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
+	background-color:#476e9e;
+}
+.search button:active {
+	position:relative;
+	top:1px;
+}
+
+
+
+
+#container-all-houses {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#container-all-houses p {
+  font-size: 8px;
+  width: 100%;
+}
+
+#render {
+  padding: 5px;
+  border-radius: 1px;
+  box-sizing: border-box;
+  height: auto;
+  width: 200px;
+  margin: 20px 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  box-shadow: 10px 10px 10px -1px #696969;
+}
+
+
+#render:hover {
+    transform: scale(1.15) !important; 
+}
+
+
+#render button {
+	box-shadow: 0px 0px 0px 2px #9fb4f2;
+	background:linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
+	background-color: red;
+	border-radius:10px;
+	border:1px solid #4e6096;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:9px;
+	padding:2px 7px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #283966;
+}
+#render button:hover {
+	background:linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
+	background-color:#476e9e;
+}
+#render button:active {
+	position:relative;
+	top:1px;
+}
+
+#render-fav {
+    padding: 5px;
+    background-color: #90EE90;
+    border-radius: 10px;
+    box-sizing: border-box;
+    height: auto;
+    width: 250px;
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  #footer {
+    height: 8vh;
+    width: 100%;
+    background-color: #696969;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+  }
+
+
+#sell-input {
+    margin-left: 40px;
+}
+
+
+#sell-input p{
+    display: flex;
+    flex-direction: column;
+    height: 30px;
+    width: 60%;
+}
+
+#edit-input {
+    margin-left: 40px;
+}
+
+#edit-input p{
+    display: flex;
+    flex-direction: column;
+    height: 30px;
+    width: 60%;
+}
+
+
+#welcome {
+    height: 72vh;
+    padding-top: 68px;
+    font-size: 43px;
+    font-weight: 900;
+    font-family: cursive;
+    color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-image: url('./Components/background.jpg');
+    background-size: cover;   
+}
+
+#welcome input {
+    width: 150px;
+    height: 20px;
+    border-radius: 5px;
+}
+
+#welcome button {
+    width: 70px;
+    height: 25px;
+    border-radius: 4px;
+    font-size: 12px;
 }
