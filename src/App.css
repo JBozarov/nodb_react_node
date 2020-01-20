@@ -1,24 +1,24 @@
 
 .App {
-  margin: 2px;
-  background-color: #DCDCDC;
+    margin: 2px;
+    background-color: #DCDCDC;
 }
 
 #body {
-    min-height: 75vh;
+    min-height: 77vh;
 }
 
 
 #header {
-  height: 12vh;
-  width: 100%;
-  background-color: black;
-  color: blanchedalmond;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  box-sizing: border-box;
+    height: 12vh;
+    width: 100%;
+    background-color: black;
+    color: blanchedalmond;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 #header span {
@@ -27,30 +27,38 @@
 }
 
 .header-nav span{
-  padding: 0 5px;
-  margin-right: 0;
+    padding: 0 5px;
+    margin-right: 0;
 }
 
 #menu-bar {
-  width: 35px;
-  height: 5px;
-  background-color: black;
-  margin: 6px 0;
+    width: 35px;
+    height: 5px;
+    background-color: black;
+    margin: 6px 0;
 }
 
 #dropdown{
-  height: 300px;
-  width: 200px;
-  background-color: blue;
-  position: absolute;
-  top: auto;
-  left: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  animation: open 900ms;
-  overflow: hidden;
+    height: 200px;
+    width: 140px;
+    background-color: rgb(115, 115, 115);
+    opacity: 1;
+    position: absolute;
+    top: auto;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    animation: open 900ms;
+    overflow: hidden;
+}
+
+#dropdown span {
+    padding-left: 20px;
+    font-style: oblique;
+    color: white;
+    font-weight: 800;
 }
 
 @keyframes open {
@@ -58,20 +66,20 @@
     height: 0px;
   }
   to {
-    height: 300px;
+    height: 200px;
   }
 }
 
 .search {
-  height: 10vh;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0px 20px;
-  box-sizing: border-box;
-  border: 1px solid black;
-  margin: 5px;
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    margin: 5px;
 }
 
 .search button {
@@ -102,29 +110,56 @@
 
 
 #container-all-houses {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 #container-all-houses p {
-  font-size: 8px;
-  width: 100%;
+    font-size: 8px;
+    width: 100%;
 }
 
+#container-sold-houses {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+  
+#container-sold-houses p {
+    font-size: 8px;
+    width: 100%;
+}
+
+#container-favorite-houses {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+#container-favorite-houses p {
+    font-size: 8px;
+    width: 100%;
+}
+
+
+
 #render {
-  padding: 5px;
-  border-radius: 1px;
-  box-sizing: border-box;
-  height: auto;
-  width: 200px;
-  margin: 20px 25px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  box-shadow: 10px 10px 10px -1px #696969;
+    padding: 5px;
+    border-radius: 1px;
+    box-sizing: border-box;
+    height: auto;
+    width: 200px;
+    margin: 20px 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    box-shadow: 10px 10px 10px -1px #696969;
 }
 
 
@@ -179,6 +214,8 @@
     justify-content: center;
     align-items: center;
     font-size: 10px;
+    color: white;
+    font-weight: 700;
   }
 
 

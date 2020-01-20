@@ -18,19 +18,20 @@ class App extends Component {
         favoriteHouses: [],
         toggleAll: false,
         toggleSold: false, 
+        toggleFav: false, 
         searchToggle: false,
         welcomeToggle: true, 
         agentToggle: false,
     }
 }
 
-//get all houses, as soon as page loaded
+//AXIOS GET all houses, as soon as page loaded
 componentDidMount () {
-    this.setState({toggleAll: false})
     this.showAll();
+    this.setState({toggleAll: false})
 }
 
-//show all houses, get request outside of componentDidMount after changing 
+//AXIOS GET show all houses, get request outside of componentDidMount after changing 
 showAll = () => {
     axios.get('/api/houses')
     .then(res=>this.setState({houses: res.data}))
@@ -38,69 +39,76 @@ showAll = () => {
     this.setState({toggleAll: true, toggleSold: false})
 }
 
-//delete one house, delete request 
-houseSold = id => {
-    axios.delete(`/api/houses/${id}`)
-    .then(res => this.setState({houses: res.data}))
-    .catch(err=>console.log(err))
+//AXIOS GET show deleted houses(sold) get request 
+showSoldHouses = () => {
+    this.setState({ toggleAll: false, toggleSold: true, toggleFav: false }); 
+    axios.get('/api/sold')
+    .then(res=>this.setState({ soldHouses: res.data }))
 }
 
-//adding new house, post request 
+//AXIOS GET show favorite list, get request 
+showFavHouses = () => {
+    this.setState({ toggleAll: false, toggleSold: false, toggleFav: true }); 
+    axios.get('/api/favorite')
+    .then(res=>this.setState({ favoriteHouses: res.data }))
+}
+
+
+
+
+//AXIOS POST adding new house
 publish = body => {
     axios.post('/api/houses', body)
     .then(res=> this.setState({houses: res.data}))
     .catch(err => console.log(`Not published: ${err}`))
 }
-    
-//update existing house, put request
-submitEdit = (id, body) => {
-    axios.put(`/api/houses/${id}`, body)
-    .then(res=>this.setState ({houses: res.data }))
-    .catch(err => console.log(err))
-}
-
-//add to favorite list, post
+   
+//AXIOS POST add to favorite list, post
 saveToFavorite = id => {
     axios.post(`/api/favorite/${id}`)
     .then(res => this.setState({favoriteHouses: res.data}))
     .catch(err=>console.log(err))
 }
 
-//show deleted houses(sold) get request 
-showSoldHouses = () => {
-    this.setState({ toggleAll: false, toggleSold: true }); 
-    axios.get('/api/deleted')
-    .then(res=>this.setState({ soldHouses: res.data }))
+
+
+//AXIOS PUT update existing house
+submitEdit = (id, body) => {
+    axios.put(`/api/houses/${id}`, body)
+    .then(res=>this.setState ({houses: res.data }))
+    .catch(err => console.log(err))
 }
 
-//show favorite list, get request 
-showFavHouses = () => {
-    this.setState({ toggleAll: false, toggleSold: true }); 
-    axios.get('/api/favorite')
-    .then(res=>this.setState({ soldHouses: res.data }))
-}
 
+
+//AXIOS DELETE one house
+houseSold = id => {
+    axios.delete(`/api/houses/${id}`)
+    .then(res => this.setState({houses: res.data}))
+    .catch(err=>console.log(err))
+}
 
 //welcome page fn, toggles
 discover = () => this.setState({toggleAll: true, searchToggle: true, welcomeToggle: false})
 
 //sellhouse opens sellhouse page 
-sellHouse = () =>this.setState({toggleAll: false, toggleSold: false})
+sellHouse = () =>this.setState({toggleAll: false, toggleSold: false, toggleFav: false })
 
 //edit page opens
-editHouse = () =>this.setState({toggleAll: false, toggleSold: false})
+editHouse = () =>this.setState({toggleAll: false, toggleSold: false, toggleFav: false })
 
 //login, logout toggle
 loginAgent = () => this.setState({agentToggle: !this.state.agentToggle, searchToggle: true, welcomeToggle: false, toggleAll: true })
 
  
+
 //Searches based on input data, by city, country, max and min price 
 //Input and search button is on Search Component
 searchBy = (searchInput, selected) => {
       let {houses} = this.state; 
       let sorted; 
       if (selected==='city') sorted = houses.filter(val=>val.city.toLowerCase().includes(searchInput.toLowerCase())); 
-      else if (selected==='country') sorted = houses.filter(val=>val.country.toLowerCase().includes(searchInput.toLowerCase())); 
+      else if (selected==='state') sorted = houses.filter(val=>val.state.toLowerCase().includes(searchInput.toLowerCase())); 
       else if (selected==='max') sorted = houses.filter(val=>parseInt(val.price)<parseInt(searchInput)); 
       else if (selected==='min') sorted = houses.filter(val=>parseInt(val.price)>parseInt(searchInput)); 
       this.setState({ houses: sorted, showAll: false }); 
@@ -109,7 +117,7 @@ searchBy = (searchInput, selected) => {
 
 
 render() {
-    const {houses, toggleSold, soldHouses, toggleAll, searchToggle, welcomeToggle, agentToggle} = this.state; 
+    const {houses, toggleSold, soldHouses, favoriteHouses, toggleAll, searchToggle, welcomeToggle, agentToggle, toggleFav} = this.state; 
     return (
       <div className="App">
          <Header agentToggle={agentToggle} loginAgent={this.loginAgent} />
@@ -119,9 +127,11 @@ render() {
             toggleAll={toggleAll}
             toggleSold={toggleSold}
             searchToggle={searchToggle}
+            favoriteHouses={favoriteHouses}
             soldHouses={soldHouses}
             welcomeToggle={welcomeToggle}
             agentToggle={agentToggle}
+            toggleFav={toggleFav}
 
             //Passed methods 
             houseSold={this.houseSold}

@@ -42,10 +42,10 @@ export class Search extends Component {
             </div>
 
             <div>
-                <input placeholder='Search by' onChange={e=>this.handleSearchInput(e)} value={this.state.searchInput} />
+                <input placeholder='Filter by' onChange={e=>this.handleSearchInput(e)} value={this.state.searchInput} />
                 <select onChange={e=>this.handleSelect(e)} >
                         <option id='option' >  City </option>
-                        <option id='option' name='selected' value='country'  > Country  </option>
+                        <option id='option' name='selected' value='state'  > State  </option>
                         <option id='option' name='selected' value='max'  > Max price </option>
                         <option id='option' name='selected' value='min'  > Min price </option>
                 </select>

@@ -13,11 +13,12 @@ export class Body extends Component {
         sellToggle: false,
         editToggle: false, 
         editHouseIndex: '',
+        idsOfSavedToFav: [],
 
         image: '',
         address: '', 
         city: '',
-        country: '',
+        state: '',
         zip_code: '',
         seller: '',
         seller_number: '', 
@@ -37,7 +38,7 @@ export class Body extends Component {
         image: '',
         address: '', 
         city: '',
-        country: '',
+        state: '',
         zip_code: '',
         seller: '',
         seller_number: '', 
@@ -91,7 +92,7 @@ showFavHouses = () => {
         image: '',
         address: '', 
         city: '',
-        country: '',
+        state: '',
         zip_code: '',
         seller: '',
         seller_number: '', 
@@ -100,11 +101,17 @@ showFavHouses = () => {
       })
   }
 
+  saveToFavorite = index => {
+      const {idsOfSavedToFav} = this.state; 
+      this.props.saveToFavorite(index); 
+      this.setState({idsOfSavedToFav: [...idsOfSavedToFav, index]})
+  }
+
 
   render() {
     const {toggle, sellToggle } = this.state; 
-    const {image, address, city, country, zip_code, seller, seller_number, price, editToggle, editHouseIndex} = this.state
-    const {houses, houseSold, saveToFavorite, toggleSold, soldHouses, toggleAll, searchBy, searchToggle, discover, welcomeToggle, agentToggle } = this.props; 
+    const {image, address, city, state, zip_code, seller, seller_number, price, editToggle, editHouseIndex, idsOfSavedToFav} = this.state
+    const {houses, houseSold, toggleSold, soldHouses, toggleAll, toggleFav, favoriteHouses, searchBy, searchToggle, discover, welcomeToggle, agentToggle } = this.props; 
     return (
       <div id="body"> {searchToggle &&
         <Search 
@@ -122,8 +129,7 @@ showFavHouses = () => {
         {toggle ? 
           <div id='dropdown' >
              <span>SERVICES</span>
-             <span>dsdlfksdkf slkfsd</span>
-             <span><button></button> SELL MY HOUSE </span>
+             <span> SELL MY HOUSE </span>
              <span>PORTFOLIO</span>
              <span>ABOUT</span>
              <span>TEAM</span>
@@ -136,8 +142,9 @@ showFavHouses = () => {
                 <div id='render' key={index}>
                    <img src={house.image} alt='Image is coming soon' style={{height: '100px', width: '140px', borderRadius: '15px'}} />
                    <h5> Price: ${house.price} </h5>
-                   <p> House ID: {house.house_id} </p>
-                   <p> Address: {house.address}, {house.city}, {house.country} {house.zip_code} </p>
+                  
+                   <p> House ID: {house.house_id}  {idsOfSavedToFav.includes(index) && !agentToggle && <span style={{color: 'green', fontWeight: '800', fontSize: '10px'}} > Your Fav </span>} </p>
+                   <p> Address: {house.address}, {house.city}, {house.state} {house.zip_code} </p>
                    <p> <span style={{fontWeight: 'bold'}} >Seller:</span>  {house.seller}, Number: {house.seller_number} </p>
 
                    {agentToggle ?
@@ -146,7 +153,7 @@ showFavHouses = () => {
                     <button onClick={()=>this.editHouse(index)} > EDIT  </button>
                     </div> : 
                     <div style={{float: 'right'}} > 
-                    <button onClick={()=>saveToFavorite(index)} > Save to Fevirite </button>
+                    <button onClick={()=>this.saveToFavorite(index)} > Save to Fevirite </button>
                     </div>
                    }
 
@@ -154,9 +161,21 @@ showFavHouses = () => {
            </div>
  
 
-           <div id='container-3' > {
+           <div id='container-sold-houses' > {
             toggleSold && soldHouses.map((house, index) =>(
-                    <div id='render-fav' key={index}>
+                    <div id='render' key={index}>
+                    <img src={house.image} alt='Image is coming soon' style={{height: '100px', width: '140px'}} />
+                    <h5> Price: ${house.price} </h5>
+                    <p> House ID: {house.house_id} </p>
+                    <p> Address: {house.address}, {house.city}, {house.state} {house.zip_code} </p>
+                    <p> <span style={{fontWeight: 'bold'}} >Seller:</span>  {house.seller}, Number: {house.seller_number} </p>
+                 </div>))}
+           </div>
+
+
+           <div id='container-favorite-houses' > {
+            toggleFav && favoriteHouses.map((house, index) => (
+                    <div id='render' key={index}>
                     <img src={house.image} alt='Image is coming soon' style={{height: '100px', width: '140px'}} />
                     <h5> Price: ${house.price} </h5>
                     <p> House ID: {house.house_id} </p>
@@ -188,12 +207,12 @@ showFavHouses = () => {
                                 type='text'
                                 placeholder='Enter city' /> </p> 
 
-                    <p> <label> Country </label> <input 
-                                name='country' 
-                                value={country} 
+                    <p> <label> State </label> <input 
+                                name='state' 
+                                value={state} 
                                 onChange={e=>this.handleChange(e)}
                                 type='text'
-                                placeholder='Enter country' /> </p> 
+                                placeholder='Enter state' /> </p> 
 
                     <p> <label> Zip code </label> <input 
                                 name='zip_code' 
@@ -245,10 +264,10 @@ showFavHouses = () => {
                                 onChange={e=>this.handleChange(e)}
                                 type='text' /> </p> 
 
-                    <p> <label> Edit Country </label> <input 
-                                name='country' 
-                                value={country}
-                                placeholder={houses[editHouseIndex].country} 
+                    <p> <label> Edit State </label> <input 
+                                name='state' 
+                                value={state}
+                                placeholder={houses[editHouseIndex].state} 
                                 onChange={e=>this.handleChange(e)}
                                 type='text'/> </p> 
 

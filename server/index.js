@@ -10,7 +10,7 @@ app.delete('/api/houses/:id', cont.delete);
 app.post('/api/houses', cont.create); 
 app.put('/api/houses/:id', cont.update); 
 app.post('/api/favorite/:id', cont.saveToFav); 
-app.get('/api/deleted', cont.soldHouses); 
+app.get('/api/sold', cont.soldHouses); 
 app.get('/api/favorite', cont.favHouse); 
 
 

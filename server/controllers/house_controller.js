@@ -1,5 +1,5 @@
 const houses = require('../houses/houses.json'); 
-const delList = []; 
+const soldList = []; 
 const favList = []; 
 let id = 21; 
 let house_id = 7857; 
@@ -10,19 +10,19 @@ module.exports = {
   },
   delete: (req, res) =>{
       const {id} = req.params
-      delList.push(houses[id]); 
+      soldList.push(houses[id]); 
       houses.splice(id, 1); 
       res.status(200).send(houses); 
   }, 
   create: (req, res) => {
-      const {image, address, city, country, zip_code, seller, seller_number, price} = req.body; 
+      const {image, address, city, state, zip_code, seller, seller_number, price} = req.body; 
       let newHouse = {
           id, 
           image, 
           house_id,
           address, 
           city, 
-          country, 
+          state, 
           zip_code, 
           seller, 
           seller_number, 
@@ -35,12 +35,12 @@ module.exports = {
   },
   update: (req, res) => {
     console.log('update, put: ', req.body, req.params.id)
-    const {address, city, country, zip_code, seller, seller_number, price} = req.body; 
+    const {address, city, state, zip_code, seller, seller_number, price} = req.body; 
     const ind = houses.findIndex(val=>val.id===parseInt(req.params.id));
     
         houses[ind].address = address || houses[ind].address; 
         houses[ind].city = city || houses[ind].city; 
-        houses[ind].country = country || houses[ind].country; 
+        houses[ind].state = state || houses[ind].state; 
         houses[ind].zip_code = zip_code || houses[ind].zip_code; 
         houses[ind].seller = seller || houses[ind].seller; 
         houses[ind].seller_number = seller_number || houses[ind].seller_number; 
@@ -55,7 +55,8 @@ module.exports = {
     },
 
       soldHouses: (req, res) => {
-      res.status(200).send(delList); 
+      res.status(200).send(soldList); 
+      console.log(soldList)
   }, 
 
    favHouse: (req, res) => {
