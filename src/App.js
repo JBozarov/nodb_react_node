@@ -117,6 +117,7 @@ searchBy = (searchInput, selected) => {
 
 
 render() {
+   console.log(this.state.toggleAll)
     const {houses, toggleSold, soldHouses, favoriteHouses, toggleAll, searchToggle, welcomeToggle, agentToggle, toggleFav} = this.state; 
     return (
       <div className="App">
